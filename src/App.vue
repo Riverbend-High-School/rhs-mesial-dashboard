@@ -3,26 +3,26 @@
     <div class="row">
       <!-- Left Column -->
       <div class="col-4" style="background:#235234;"> 
-          <div style="background:rgba(0, 0, 0, 0.55); height:15vh;">
+          <div class="top_row">
             <Logo></Logo>
           </div>
-          <div style="height:75vh;">
+          <div class="middle_row">
             <Events></Events>
           </div>
-          <div style="background:rgba(0, 0, 0, 0.55); height:10vh;">
+          <div class="bottom_row">
             <Block></Block>
           </div>
       </div>
 
       <!-- Right Column -->
       <div class="col-8" style="background:#103779;">
-          <div style="background:rgba(0, 0, 0, 0.55); height: 15vh;">
+          <div class="top_row">
             <Clock></Clock>
           </div>
-          <div style="height: 75vh;">
+          <div class="middle_row">
             <Slides></Slides>
           </div>
-          <div style="background:rgba(0, 0, 0, 0.55); height: 10vh; display: flex; justify-content: center;">
+          <div class="bottom_row">
             <Notice></Notice>
           </div>
       </div>
@@ -60,5 +60,19 @@ export default {
   h1 {
     margin: 0px 0px 0px 0px;
     padding: 0px 0px;
+  }
+
+  .top_row {
+    background:rgba(0, 0, 0, 0.55); 
+    height:15vh;
+  }
+
+  .middle_row {
+    height:75vh;
+  }
+
+  .bottom_row {
+    background:rgba(0, 0, 0, 0.55); 
+    height:10vh;
   }
 </style>

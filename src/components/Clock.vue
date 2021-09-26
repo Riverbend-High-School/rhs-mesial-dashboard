@@ -4,12 +4,16 @@
 </template>
 
 <script>
-export default {
-  name: 'Clock',
-  props: {
-      class : String
+  export default {
+    name: 'Clock',
+    props: {
+        class : String
+    }
   }
-}
+
+  import moment from 'moment';
+  moment().format();
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
