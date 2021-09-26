@@ -1,6 +1,6 @@
 
 <template>
-  <h1>Events</h1>
+  <h1>Upcoming Events:</h1>
 </template>
 
 <script>
