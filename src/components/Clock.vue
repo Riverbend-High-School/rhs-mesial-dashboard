@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'Logo',
+  name: 'Clock',
   props: {
       class : String
   }

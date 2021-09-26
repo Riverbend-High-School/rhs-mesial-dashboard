@@ -1,10 +1,10 @@
 <template>
-  <h1>Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World</h1>
+  <h1>1234567890123456789012345</h1>
 </template>
 
 <script>
 export default {
-  name: 'Logo',
+  name: 'Notice',
   props: {
       class : String
   }
@@ -15,6 +15,8 @@ export default {
 <style scoped>
   h1 {
     text-align: center;
-    font-size: 3vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-size: 8vh; /* Max character length for 8vh: 25 characters one line, 4vh: 50 characters two lines*/
   }
 </style>
