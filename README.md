@@ -11,4 +11,4 @@ Insert Description Here Later @GabrielHogan
 5. Current Block
 6. Notice
 
-- Implement /media/template.mp4
+- Implement '/media/Riverbend Information Displays Template.png'
