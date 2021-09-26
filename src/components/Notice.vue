@@ -1,16 +1,25 @@
 <template>
   <div class="notice_container">
-    <h1 class="notice_text">1234567890123456789012345</h1>
+    <h1 class="notice_text">{{ json.message }}</h1>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'Notice',
-  props: {
-      class : String
+  import axiosInstance from "../helpers/axiosInstance.ts"
+  export default {
+    name: 'Notice',
+    data () {
+      return {
+        json: {},
+      }
+    },
+    mounted () {
+      axiosInstance
+        .get('/dashboard/msgnotice/')
+        .then(response => (this.json = response.data))
+        .catch(error => console.log(error))
+    }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
