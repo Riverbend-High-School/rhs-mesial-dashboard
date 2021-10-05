@@ -6,6 +6,7 @@
       :autoplay="true"
       :autoplaySpeed="10000"
     >
+      <!-- TODO: Figure out overflow events (> 5) -->
       <div v-if="events.today.length" id="today" class="events_container">
         <h2>Today:</h2>
         <div class="event" v-for="(event, index) in events.today" :key="index">
@@ -40,6 +41,24 @@
           </div>
         </div>
       </div>
+      <div v-if="events.week.length" id="week" class="events_container">
+        <h2>This Week:</h2>
+        <div class="event" v-for="(event, index) in events.week" :key="index">
+          <div class="inner_event">
+            <p class="time" v-if="!event.all_day">
+              {{ dateFormat(event.start, "h:MM") }}
+              <span class="am_pm">{{ dateFormat(event.start, "TT") }}</span> -
+              {{ dateFormat(event.end, "h:MM") }}
+              <span class="am_pm">{{ dateFormat(event.end, "TT") }}</span>
+            </p>
+            <div class="allday_text" v-else>
+              <p class="allday">All Day</p>
+              <p class="am_pm">{{ dateFormat(event.start, "dddd, mmmm dS") }}</p>
+            </div>
+            <h2>{{ event.summary }}</h2>
+          </div>
+        </div>
+      </div>
       <div v-if="events.later.length" id="later" class="events_container">
         <h2>Later:</h2>
         <div class="event" v-for="(event, index) in events.later" :key="index">
@@ -50,7 +69,10 @@
               {{ dateFormat(event.end, "h:MM") }}
               <span class="am_pm">{{ dateFormat(event.end, "TT") }}</span>
             </p>
-            <p class="allday" v-else>All Day</p>
+            <div class="allday_text" v-else>
+              <p class="allday">All Day</p>
+              <p class="am_pm">{{ dateFormat(event.start, "dddd, mmmm dS") }}</p>
+            </div>
             <h2>{{ event.summary }}</h2>
           </div>
         </div>
@@ -151,6 +173,12 @@ h1 {
   width: max-content;
   padding: 0px 4px 0px 2px;
   margin: 0px 0px 4px 0px;
+}
+
+.allday_text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 h2 {
