@@ -1,5 +1,9 @@
 <template>
-  <div class="container-fluid text-white" style="min-height:100%;">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
+  <div class="container-fluid text-white" style="min-height:100%; font-family: 'Ubuntu', serif; overflow: hidden;">
     <div class="row">
       <!-- Left Column -->
       <div class="col-4" style="background:#235234;"> 
