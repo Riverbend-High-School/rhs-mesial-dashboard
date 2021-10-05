@@ -80,3 +80,14 @@ export default {
     height:10vh;
   }
 </style>
+
+
+<style>
+.agile {
+  width: 100%;
+}
+
+.agile__slides {
+  height: 75vh;
+}
+</style>
