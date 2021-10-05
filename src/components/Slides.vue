@@ -5,6 +5,7 @@
       :dots="false"
       :autoplay="true"
       :autoplaySpeed="30000"
+      :unagile="slides.length <= 1"
     >
       <div class="slides_container" v-for="slide in slides" :key="slide.id">
         <img class="slides_img" :src="url + slide.path" />

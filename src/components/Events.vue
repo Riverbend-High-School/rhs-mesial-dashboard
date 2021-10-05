@@ -5,6 +5,7 @@
       :dots="false"
       :autoplay="true"
       :autoplaySpeed="10000"
+      :unagile="total_slides <= 1"
     >
       <!-- TODO: Figure out overflow events (> 5) -->
       <div v-if="events.today.length" id="today" class="events_container">
@@ -100,6 +101,7 @@ export default {
       count_interval: null,
       loading: true,
       dateFormat,
+      total_slides: 0,
     };
   },
   mounted: function() {
@@ -115,6 +117,9 @@ export default {
         .get("/dashboard/events/")
         .then((response) => {
           this.events = response.data;
+          for(let data in response.data) {
+            this.total_slides += (data.length >= 1) ? 1 : 0;
+          }
           this.loading = false;
         })
         .catch((error) => console.error(error));
