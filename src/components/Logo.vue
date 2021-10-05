@@ -28,7 +28,8 @@ export default {
 }
 
 .logo_text {
-  font-size: 1.85em;
+  /* font-size: 1.85em; */
+  font-size: 50px;
   text-align: left;
   line-height: 90%;
 }
