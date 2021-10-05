@@ -19,7 +19,7 @@
       this.loading = true;
       this.getSchedule();
       this.count_interval = setInterval(() => {
-        this.getEvents();
+        this.getSchedule();
       }, 60000);
     },
     methods: {
