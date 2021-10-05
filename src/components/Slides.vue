@@ -1,62 +1,61 @@
 <template>
-    <div name='fade' class="slides_container" v-if="loading == false" >
-      <img class="slides_img" :src="currentSlide.path" />
-      <h1 class="slides_text">{{ currentSlide.message }}</h1>
-    </div>
+  <div v-if="loading == false">
+    <agile
+      :navButtons="false"
+      :dots="false"
+      :autoplay="true"
+      :autoplaySpeed="30000"
+    >
+      <div class="slides_container" v-for="slide in slides" :key="slide.id">
+        <img class="slides_img" :src="'http://localhost:8000' + slide.path" />
+        <h1 class="slides_text">{{ slide.message }}</h1>
+      </div>
+    </agile>
+  </div>
 </template>
 
 <script>
-  import axiosInstance from "../helpers/axiosInstance.ts"
-  export default {
-    name: 'Slider',
-    data() {
-      return {
-        json: [],
-        currentIndex: 0,
-        count_interval: null,
-        loading: true,
-      }
-    },
-    mounted: function() {
-      axiosInstance
-        .get('/dashboard/activeslides')
-        .then(response => {this.json = response.data; this.loading=false;})
-        .catch(error => console.log(error))
-      this.getSlides();
-    },
-    methods: {
-      getSlides() {
-        this.count_interval = setInterval(() => {
-          this.currentIndex += 1
-        }, 5000);
-      },
-    },
-    computed: {
-      currentSlide: function() {
-        return {
-          "message": this.json[Math.abs(this.currentIndex) % this.json.length].message,
-          "path": "http://localhost:8000" + this.json[Math.abs(this.currentIndex) % this.json.length].path,
-        }
-      }
-    }
-  }
+import axiosInstance from "../helpers/axiosInstance.ts";
+import { VueAgile } from "vue-agile";
+
+export default {
+  name: "Slider",
+  components: {
+    agile: VueAgile,
+  },
+  data() {
+    return {
+      slides: [],
+      loading: true,
+    };
+  },
+  mounted: function() {
+    axiosInstance
+      .get("/dashboard/activeslides/")
+      .then((response) => {
+        this.slides = response.data;
+        this.loading = false;
+      })
+      .catch((error) => console.log(error));
+  },
+};
 </script>
 
 <style>
-  .slides_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 75vh;
-  }
+.slides_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+}
 
-  .slides_img {
-      height: 70%;
-      border-radius: 45px;
-    } 
-  
-  .slides_text {
-    font-size: 6vh;
-  }
+.slides_img {
+  height: 70%;
+  border-radius: 45px;
+}
+
+.slides_text {
+  font-size: 6vh;
+}
 </style>
