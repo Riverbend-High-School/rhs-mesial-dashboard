@@ -1,6 +1,6 @@
 <template>
   <div class="block_container">
-    <h1 class="block_text">{{ json.block }}</h1>
+    <h1 class="block_text">{{ schedule.block }}</h1>
   </div>
 </template>
 
@@ -10,24 +10,24 @@
     name: 'Block',
     data() {
       return {
-        events: [],
+        schedule: [],
         count_interval: null,
         loading: true,
       };
     },
     mounted: function() {
       this.loading = true;
-      this.getBlock();
+      this.getSchedule();
       this.count_interval = setInterval(() => {
         this.getEvents();
       }, 60000);
     },
     methods: {
-      getEvents() {
+      getSchedule() {
         axiosInstance
           .get("/schedule/")
           .then((response) => {
-            this.events = response.data;
+            this.schedule = response.data;
             this.loading = false;
           })
           .catch((error) => console.error(error));
