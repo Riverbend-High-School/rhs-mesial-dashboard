@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: process.env.VUE_APP_APIHOST,
     timeout: 5000,
     headers: {
         'Authorization': "Bearer TOKEN",

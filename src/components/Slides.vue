@@ -7,7 +7,7 @@
       :autoplaySpeed="30000"
     >
       <div class="slides_container" v-for="slide in slides" :key="slide.id">
-        <img class="slides_img" :src="'http://localhost:8000' + slide.path" />
+        <img class="slides_img" :src="url + slide.path" />
         <h1 class="slides_text">{{ slide.message }}</h1>
       </div>
     </agile>
@@ -27,6 +27,7 @@ export default {
     return {
       slides: [],
       loading: true,
+      url: process.env.VUE_APP_APIHOST,
     };
   },
   mounted: function() {
