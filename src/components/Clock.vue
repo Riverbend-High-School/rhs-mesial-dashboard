@@ -53,7 +53,8 @@
   }
 
   .clock_date {
-    font-size: 2em;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.85);
     padding-left: 0.25em;
   }
 </style>
