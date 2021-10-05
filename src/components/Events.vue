@@ -161,3 +161,12 @@ h2 {
 }
 </style>
 
+<style>
+.agile {
+  width: 100%;
+}
+
+.agile__slides {
+  height: 75vh;
+}
+</style>
