@@ -31,4 +31,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: riverbendhighschool/rhs_mesial_dashboard:latest
+          tags: riverbendhighschool/rhs-mesial-dashboard:latest
