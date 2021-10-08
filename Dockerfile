@@ -1,7 +1,8 @@
 ## Build Stage
 # Pull base image
 FROM node:lts-alpine as build-stage
-# Clone git repo
+# Install git and clone repo
+RUN apk --no-cache add git
 RUN git clone https://github.com/Riverbend-High-School/rhs-mesial-dashboard.git /app
 # Set the working directory
 WORKDIR /app
