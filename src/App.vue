@@ -51,6 +51,11 @@ export default {
     Slides,
     Block,
     Notice,
+  },
+  methods: {
+    throwError() {
+      throw new Error('Sentry Error');
+    }
   }
 }
 </script>
