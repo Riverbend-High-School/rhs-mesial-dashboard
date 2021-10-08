@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  rhs_mesial_dashboard:
+    container_name: vue
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
