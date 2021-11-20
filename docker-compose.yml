@@ -5,6 +5,9 @@ services:
     container_name: vue
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
-      - '80:80'
+      - '80:8080'
+    environment:
+      VUE_APP_APIHOST: "http://localhost:8000"
+      VUE_APP_SENTRYDSN: "https://9ae51dc14dfc4ad5a1b6269ac5694908@o1031901.ingest.sentry.io/5998767"
