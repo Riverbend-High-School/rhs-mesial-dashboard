@@ -13,10 +13,10 @@
         <div class="event" v-for="(event, index) in events.today" :key="index">
           <div class="inner_event">
             <p class="time" v-if="!event.all_day">
-              {{ dateFormat(event.start, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.start, "TT") }}</span> -
-              {{ dateFormat(event.end, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.end, "TT") }}</span>
+              {{ formatDate(event.start, "h:MM") }}
+              <span class="am_pm">{{ formatDate(event.start, "TT") }}</span> -
+              {{ formatDate(event.end, "h:MM") }}
+              <span class="am_pm">{{ formatDate(event.end, "TT") }}</span>
             </p>
             <p class="allday" v-else>All Day</p>
             <h2>{{ event.summary }}</h2>
@@ -32,10 +32,10 @@
         >
           <div class="inner_event">
             <p class="time" v-if="!event.all_day">
-              {{ dateFormat(event.start, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.start, "TT") }}</span> -
-              {{ dateFormat(event.end, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.end, "TT") }}</span>
+              {{ formatDate(event.start, "h:MM") }}
+              <span class="am_pm">{{ formatDate(event.start, "TT") }}</span> -
+              {{ formatDate(event.end, "h:MM") }}
+              <span class="am_pm">{{ formatDate(event.end, "TT") }}</span>
             </p>
             <p class="allday" v-else>All Day</p>
             <h2>{{ event.summary }}</h2>
@@ -43,18 +43,25 @@
         </div>
       </div>
       <div v-if="events.week.length" id="week" class="events_container">
-        <h2>This Week:</h2>
+        <h2>Within a Week:</h2>
         <div class="event" v-for="(event, index) in events.week" :key="index">
           <div class="inner_event">
-            <p class="time" v-if="!event.all_day">
-              {{ dateFormat(event.start, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.start, "TT") }}</span> -
-              {{ dateFormat(event.end, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.end, "TT") }}</span>
-            </p>
+            <div class="allday_text" v-if="!event.all_day">
+              <p class="time">
+                {{ formatDate(event.start, "h:MM") }}
+                <span class="am_pm">{{ formatDate(event.start, "TT") }}</span> -
+                {{ formatDate(event.end, "h:MM") }}
+                <span class="am_pm">{{ formatDate(event.end, "TT") }}</span>
+              </p>
+              <p class="am_pm">
+                {{ formatDate(event.start, "dddd, mmmm dS") }}
+              </p>
+            </div>
             <div class="allday_text" v-else>
               <p class="allday">All Day</p>
-              <p class="am_pm">{{ dateFormat(event.start, "dddd, mmmm dS") }}</p>
+              <p class="am_pm">
+                {{ formatDate(event.start, "dddd, mmmm dS") }}
+              </p>
             </div>
             <h2>{{ event.summary }}</h2>
           </div>
@@ -64,15 +71,22 @@
         <h2>Later:</h2>
         <div class="event" v-for="(event, index) in events.later" :key="index">
           <div class="inner_event">
-            <p class="time" v-if="!event.all_day">
-              {{ dateFormat(event.start, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.start, "TT") }}</span> -
-              {{ dateFormat(event.end, "h:MM") }}
-              <span class="am_pm">{{ dateFormat(event.end, "TT") }}</span>
-            </p>
+            <div class="allday_text" v-if="!event.all_day">
+              <p class="time">
+                {{ formatDate(event.start, "h:MM") }}
+                <span class="am_pm">{{ formatDate(event.start, "TT") }}</span> -
+                {{ formatDate(event.end, "h:MM") }}
+                <span class="am_pm">{{ formatDate(event.end, "TT") }}</span>
+              </p>
+              <p class="am_pm">
+                {{ formatDate(event.start, "dddd, mmmm dS") }}
+              </p>
+            </div>
             <div class="allday_text" v-else>
               <p class="allday">All Day</p>
-              <p class="am_pm">{{ dateFormat(event.start, "dddd, mmmm dS") }}</p>
+              <p class="am_pm">
+                {{ formatDate(event.start, "dddd, mmmm dS") }}
+              </p>
             </div>
             <h2>{{ event.summary }}</h2>
           </div>
@@ -100,11 +114,10 @@ export default {
       events: [],
       count_interval: null,
       loading: true,
-      dateFormat,
       total_slides: 0,
     };
   },
-  mounted: function() {
+  mounted: function () {
     this.loading = true;
     this.getEvents();
     this.count_interval = setInterval(() => {
@@ -117,12 +130,27 @@ export default {
         .get("/dashboard/events/")
         .then((response) => {
           this.events = response.data;
-          for(let data in response.data) {
-            this.total_slides += (data.length >= 1) ? 1 : 0;
+          for (let data in response.data) {
+            this.total_slides += data.length >= 1 ? 1 : 0;
           }
           this.loading = false;
         })
         .catch((error) => console.error(error));
+    },
+    formatDate(date, format) {
+      let r = new RegExp("^[0-9]{4}-[0-9]{2}-[0-9]{2}$");
+      var d;
+
+      if (r.test(date)) {
+        d = Date.parse(date) + 5 * 60 * 60 * 1000;
+      } else {
+        d = Date.parse(date);
+      }
+
+      console.log(
+        `${date} ${format} ${d.toString()} => ${dateFormat(d, format)}`
+      );
+      return dateFormat(d, format);
     },
   },
 };
@@ -167,6 +195,11 @@ h1 {
 }
 
 .am_pm {
+  color: gray;
+}
+
+.date_text {
+  font-size: 25px;
   color: gray;
 }
 
